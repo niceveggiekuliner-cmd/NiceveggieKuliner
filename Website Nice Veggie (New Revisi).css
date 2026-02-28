@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* HERO */
+.hero{
+    background:
+        linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+        url("images/background-toko.jpg") center top no-repeat;
+    background-size: contain;
+    background-color:#000;
+    position: relative;
+}
+
+/* OVERLAY */
+.overlay {
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.overlay h1 {
+    font-size: 48px;
+}
+
+.overlay p {
+    font-size: 20px;
+    margin: 10px 0 25px;
+}
+
+/* BUTTON */
+.btn-wa {
+    background: #25d366;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* NAV */
+.top-nav{
+    position:absolute;
+    top:30px;
+    right:40px;
+    z-index:100;
+}
+
+.top-nav a{
+    color:#ffffff;
+    margin-left:25px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.top-nav a:hover{
+    color:#25D366;
+}
+
+/* SECTION */
+section {
+    padding: 60px 10%;
+}
+
+section h2 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+/* MENU */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.menu-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.menu-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.menu-card h3 {
+    margin: 10px 0;
+}
+
+.menu-card p {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* ================================================= */
+/* ====== TENTANG KAMI (FOTO + TEKS SAMPING) ======= */
+/* ================================================= */
+
+#tentang .about-box{
+    display:flex;
+    justify-content:center;
+}
+
+#tentang .about-flex{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    max-width:1000px;
+    width:100%;
+}
+
+/* FOTO */
+#tentang .about-flex img{
+    width:220px;              /* 🔑 FOTO JADI KECIL */
+    height:auto;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    flex-shrink:0;            /* 🔑 AGAR TIDAK MEMBESAR */
+}
+
+/* TEKS */
+#tentang .about-text{
+    flex:1;
+    line-height:1.9;
+}
+
+/* RESPONSIVE HP */
+@media(max-width:768px){
+    #tentang .about-flex{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    #tentang .about-flex img{
+        width:180px;
+    }
+}

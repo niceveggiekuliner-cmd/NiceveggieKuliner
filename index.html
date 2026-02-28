@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Nice Veggie</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#fff;
+}
+
+/* ================= HERO ================= */
+.hero{
+    height:60vh;
+    background:
+        linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+        url("images/background-toko.jpg") center/cover no-repeat;
+}
+
+/* ================= LOGO ================= */
+.top-bar{
+    position:absolute;
+    top:20px;
+    left:30px;
+    display:flex;
+    align-items:center;
+    z-index:10;
+}
+.top-bar img{
+    width:55px;
+    margin-right:12px;
+}
+.top-bar h1{
+    color:#fff;
+    font-size:28px;
+    font-style:italic;
+}
+
+/* ================= NAV ================= */
+.top-nav{
+    position:absolute;
+    top:30px;
+    right:40px;
+    z-index:10;
+}
+.top-nav a{
+    color:#fff;
+    margin-left:25px;
+    text-decoration:none;
+    font-weight:bold;
+}
+.top-nav a:hover{
+    color:#25D366;
+}
+
+/* ================= SECTION ================= */
+section{
+    padding:70px 10%;
+}
+h2{
+    text-align:center;
+    color:#4CAF50;
+    margin-bottom:30px;
+}
+
+/* ================= ANIMASI PAGE ================= */
+.page-section{
+    display:none;
+    opacity:0;
+    transform:translateY(30px);
+    transition:.4s;
+}
+.page-section.active{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= TENTANG ================= */
+#tentang{
+    background:#e8f5e9;
+}
+.about-flex{
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+.about-flex img{
+    width:40%;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.about-text{
+    width:60%;
+    line-height:1.9;
+}
+
+/* ================= ADDRESS BAR ================= */
+.address-bar{
+    margin-top:35px;
+    padding:15px;
+    text-align:center;
+    background:#dcedc8;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* ================= MENU ================= */
+#menu{
+    background:#fffaf0;
+}
+.menu-list-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-bottom:50px;
+}
+.menu-list-grid img{
+    width:100%;
+    border-radius:15px;
+}
+
+/* ================= FAVORITE ================= */
+.favorite-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+}
+.favorite-item{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+.favorite-item img{
+    width:100%;
+    height:200px;
+    object-fit:contain;
+    background:#fff;
+}
+.favorite-info{
+    text-align:center;
+    padding:15px;
+}
+.price{
+    color:#2e7d32;
+    font-weight:bold;
+}
+
+/* ================= NOTE ================= */
+.menu-note{
+    margin-top:25px;
+    text-align:center;
+    font-style:italic;
+}
+
+/* ================= KONTAK ================= */
+.menu-contact{
+    margin-top:50px;
+    text-align:center;
+    padding:35px;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.btn-wa{
+    display:inline-block;
+    margin-top:20px;
+    padding:14px 30px;
+    background:#25D366;
+    color:#fff;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+    .about-flex{
+        flex-direction:column;
+    }
+    .about-flex img,
+    .about-text{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    <img src="images/logo-vegetarian.png">
+    <h1>Nice Veggie</h1>
+</div>
+
+<div class="top-nav">
+    <a href="#" onclick="showSection('tentang')">Tentang Kami</a>
+    <a href="#" onclick="showSection('menu')">Menu</a>
+</div>
+
+<header class="hero"></header>
+
+<!-- ================= TENTANG ================= -->
+<section id="tentang" class="page-section active">
+<h2>🌱 Tentang Kami</h2>
+
+<div class="about-flex">
+    <img src="images/foto-tentang-kami.jpg">
+    <div class="about-text">
+        <p>
+            Nice Veggie merupakan usaha kuliner vegetarian rumahan yang telah
+            berdiri selama lebih dari enam tahun dan berkomitmen menghadirkan
+            makanan sehat, lezat, dan terjangkau.
+        </p>
+        <p>
+            Setiap menu diolah menggunakan bahan pilihan yang higienis,
+            tanpa bahan hewani, namun tetap kaya rasa dan disukai berbagai kalangan.
+        </p>
+        <p>
+            Ciri khas Nice Veggie terletak pada sambalnya yang memiliki rasa unik
+            dan menjadi favorit pelanggan setia.
+        </p>
+    </div>
+</div>
+
+</section>
+
+<!-- ================= MENU ================= -->
+<section id="menu" class="page-section">
+<h2>🍽️ Daftar Menu</h2>
+
+<div class="menu-list-grid">
+    <img src="images/menu-list-1.jpg">
+    <img src="images/menu-list-2.jpg">
+</div>
+
+<h2>⭐ Menu Favorit yang Banyak Dipésan</h2>
+
+<div class="favorite-grid">
+    <div class="favorite-item">
+        <img src="images/bebek-cabe-hijau.jpg">
+        <div class="favorite-info">
+            Bebek Cabe Hijau<br>
+            <span class="price">Rp27.000</span>
+        </div>
+    </div>
+
+    <div class="favorite-item">
+        <img src="images/lele-penyet.jpg">
+        <div class="favorite-info">
+            Lele Penyet<br>
+            <span class="price">Rp27.000</span>
+        </div>
+    </div>
+
+    <div class="favorite-item">
+        <img src="images/nasi-goreng.jpg">
+        <div class="favorite-info">
+            Nasi Goreng<br>
+            <span class="price">Rp20.000</span>
+        </div>
+    </div>
+</div>
+
+<div class="menu-note">
+    Note: Untuk foto menu makanan yang lebih lengkap dapat diakses melalui link berikut:<br>
+    <a href="https://gofood.co.id/batam/restaurant/nice-vegetarian-perum-griyamas-c313e7e9-1a62-4c50-ac2c-34ca0b643a6d" target="_blank">
+        Klik di sini (GoFood)
+    </a>
+</div>
+
+<div class="address-bar">
+    📍 Komplek Perumahan Griya Mas Blok F No. 8, Sei Panas, Kota Batam
+</div>
+
+<div class="menu-contact">
+    <h2>📞 Kontak & Pemesanan</h2>
+    <a class="btn-wa" href="https://wa.me/6282385088481" target="_blank">
+        Pesan via WhatsApp
+    </a>
+</div>
+</section>
+
+<script>
+function showSection(id){
+    document.querySelectorAll('.page-section').forEach(s=>{
+        s.classList.remove('active');
+        s.style.display="none";
+    });
+    const target=document.getElementById(id);
+    target.style.display="block";
+    setTimeout(()=>target.classList.add('active'),10);
+}
+</script>
+
+</body>
+</html>
