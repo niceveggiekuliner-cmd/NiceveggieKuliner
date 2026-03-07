@@ -5,372 +5,240 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nice Veggie</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-    background:#fff;
-}
-
-/* ================= HERO ================= */
-.hero{
-    height:60vh;
-    background:
-        linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-        url("images/background-toko.jpg") center/cover no-repeat;
-}
-
-/* ================= LOGO ================= */
-.top-bar{
-    position:absolute;
-    top:20px;
-    left:30px;
-    display:flex;
-    align-items:center;
-    z-index:10;
-}
-.top-bar img{
-    width:55px;
-    margin-right:12px;
-}
-.top-bar h1{
-    color:#fff;
-    font-size:28px;
-    font-style:italic;
-}
-
-/* ================= NAV ================= */
-.top-nav{
-    position:absolute;
-    top:30px;
-    right:40px;
-    z-index:10;
-}
-.top-nav a{
-    color:#fff;
-    margin-left:25px;
-    text-decoration:none;
-    font-weight:bold;
-}
-.top-nav a:hover{
-    color:#25D366;
-}
-
-/* ================= SECTION ================= */
-section{
-    padding:70px 10%;
-}
-h2{
-    text-align:center;
-    color:#4CAF50;
-    margin-bottom:30px;
-}
-
-/* ================= ANIMASI PAGE ================= */
-.page-section{
-    display:none;
-    opacity:0;
-    transform:translateY(30px);
-    transition:.4s;
-}
-.page-section.active{
-    display:block;
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* ================= TENTANG ================= */
-#tentang{
-    background:#e8f5e9;
-}
-.about-flex{
-    display:flex;
-    gap:40px;
-    align-items:center;
-}
-.about-flex img{
-    width:40%;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-.about-text{
-    width:60%;
-    line-height:1.9;
-}
-
-/* ================= MENU ================= */
-#menu{
-    background:#fffaf0;
-}
-.favorite-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:25px;
-}
-.favorite-item{
-    background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
-    cursor:pointer;
-}
-.favorite-item img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
-}
-.favorite-info{
-    text-align:center;
-    padding:15px;
-}
-.price{
-    color:#2e7d32;
-    font-weight:bold;
-}
-
-/* ================= NOTE ================= */
-.menu-note{
-    margin-top:25px;
-    text-align:center;
-    font-style:italic;
-}
-
-/* ================= ADDRESS ================= */
-.address-bar{
-    margin-top:35px;
-    padding:15px;
-    text-align:center;
-    background:#dcedc8;
-    border-radius:12px;
-    font-weight:bold;
-}
-
-/* ================= KONTAK ================= */
-.menu-contact{
-    margin-top:50px;
-    text-align:center;
-    padding:35px;
-    background:#fff;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-.btn-wa{
-    display:inline-block;
-    margin:10px;
-    padding:14px 30px;
-    background:#25D366;
-    color:#fff;
-    border-radius:30px;
-    text-decoration:none;
-    font-weight:bold;
-}
-.btn-grab{
-    background:#00b14f;
-}
-
-/* ================= MODAL ================= */
-.modal{
-    display:none;
-    position:fixed;
-    z-index:9999;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.85);
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-}
-.modal img{
-    max-width:80%;
-    max-height:70vh;
-    border-radius:15px;
-}
-.modal span{
-    position:absolute;
-    top:30px;
-    right:40px;
-    font-size:40px;
-    color:#fff;
-    cursor:pointer;
-}
-.modal p{
-    color:#fff;
-    margin-top:20px;
-    font-size:20px;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:768px){
-    .about-flex{
-        flex-direction:column;
-    }
-    .about-flex img,
-    .about-text{
-        width:100%;
-    }
-}
-</style>
+<!-- FONT INTER -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="top-bar">
-    <img src="images/logo-vegetarian.png">
-    <h1>Nice Veggie</h1>
-</div>
-
-<div class="top-nav">
-    <a href="#" onclick="showSection('tentang')"> 🌱Tentang Kami</a>
-    <a href="#" onclick="showSection('menu')"> 🍽️Menu</a>
-</div>
-
-<header class="hero"></header>
-
-<!-- ================= TENTANG ================= -->
-<section id="tentang" class="page-section active">
-<h2>🌱 Tentang Kami</h2>
-
-<div class="about-flex">
-    <img src="images/foto-tentang-kami.jpg">
-    <div class="about-text">
-        <p>
-            Nice Veggie adalah usaha kuliner vegetarian rumahan yang berlokasi di Kota Batam
-            dan telah berdiri selama lebih dari 6 (enam) tahun.
-        </p>
-        <p>
-            Kami menghadirkan makanan berbasis nabati dengan cita rasa khas nusantara
-            yang tetap lezat, sehat, dan terjangkau.
-        </p>
-        <p>
-            Menu favorit seperti Bebek Cabe Hijau vegetarian, Lele Penyet vegetarian,
-            serta berbagai varian nasi goreng menjadi pilihan pelanggan setia kami.
-        </p>
-        <p>
-            Seluruh makanan diproses secara higienis menggunakan bahan pilihan tanpa
-            kandungan hewani, sehingga cocok untuk pelanggan yang menjalani pola hidup sehat.
-        </p>
+<!-- NAVBAR -->
+<header>
+    <div class="nav">
+        <div class="logo-wrapper">
+            <img src="images/logo-vegetarian.png" class="logo">
+            <h2>Nice Veggie</h2>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">Tentang</a>
+            <a href="#menu">Menu</a>
+            <a href="#order">Order</a>
+        </nav>
     </div>
-</div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+
+    <!-- VIDEO BACKGROUND -->
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="images/cooking.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
 </section>
 
-<!-- ================= MENU ================= -->
-<section id="menu" class="page-section">
-<h2>⭐ Menu Favorit yang Banyak Dipesan</h2>
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="container about-wrapper">
+        <div class="about-text">
+            <h2>Tentang Kami</h2>
+            <p>
+                Nice Veggie adalah usaha kuliner vegetarian rumahan yang berlokasi di Kota Batam dan telah berdiri selama lebih dari 6 (enam) tahun. 
+                Kami menghadirkan makanan berbasis nabati dengan cita rasa khas nusantara yang tetap lezat, sehat, dan terjangkau. 
+                Menu favorit seperti Bebek Cabe Hijau vegetarian, Lele Penyet vegetarian, serta berbagai varian nasi goreng menjadi pilihan pelanggan setia kami. 
+                Seluruh makanan diproses secara higienis menggunakan bahan pilihan tanpa kandungan hewani, sehingga cocok untuk pelanggan yang menjalani pola hidup sehat.
+            </p>
 
-<div class="favorite-grid">
+            <br><br>
 
-<div class="favorite-item" onclick="openModal(this)">
-<img src="images/bebek-cabe-hijau.jpg">
-<div class="favorite-info">
-Bebek Cabe Hijau<br>
-<span class="price">Rp27.000</span>
-</div>
+            <p><strong>⏰ Jam Operasional:</strong></p>
+            <p>
+                Senin – Jumat : 09.00 – 16.00 WIB<br>
+                Sabtu : 09.00 – 13.00 WIB<br>
+                Minggu : Libur
+            </p>
+
+        </div>
+        <img src="images/foto-tentang-kami.jpg">
+    </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="menu">
+    <div class="container">
+        <h2>Menu Favorit Kami</h2>
+
+        <div class="menu-grid">
+
+            <div class="card">
+                <img src="images/bebek-cabe-hijau.jpg" 
+                onclick="openModal(this,'Bebek Cabe Hijau','Rp27.000','⭐⭐⭐⭐⭐')">
+    
+                <h3>Bebek Cabe Hijau</h3>
+                <div class="price">Rp27.000</div>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+        </div>
+
+            <div class="card">
+                <img src="images/lele-penyet.jpg"
+                onclick="openModal(this,'Lele Penyet','Rp27.000','⭐⭐⭐⭐⭐')">
+
+                <h3>Lele Penyet</h3>
+                <div class="price">Rp27.000</div>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+
+            <div class="card">
+                <img src="images/nasi-goreng.jpg"
+                onclick="openModal(this,'Nasi Goreng','Rp20.000','⭐⭐⭐⭐')">
+
+                <h3>Nasi Goreng</h3>
+                <div class="price">Rp20.000</div>
+                <div class="rating">⭐⭐⭐⭐</div>
+            </div>
+
+            <div class="card">
+                <img src="images/ikan-sambal-kentang.jpg"
+                onclick="openModal(this,'Ikan Sambal Kentang','Rp27.000','⭐⭐⭐⭐⭐')">
+
+                <h3>Ikan Sambal Kentang</h3>
+                <div class="price">Rp27.000</div>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+            </div>
+
+            <div class="card">
+                <img src="images/nasi-goreng-olive.jpg"
+                onclick="openModal(this,'Nasi Goreng Olive','Rp22.000','⭐⭐⭐⭐')">
+
+                <h3>Nasi Goreng Olive</h3>
+                <div class="price">Rp22.000</div>
+                <div class="rating">⭐⭐⭐⭐</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ORDER -->
+<section id="order" class="order">
+
+<div class="order-bar">
+
+    <h2>“Kritik & saran melalui WhatsApp, Menu lainnya tersedia di GoFood 😊⬇️.”</h2>
+
+    <div class="order-buttons">
+        <a href="https://wa.me/6282385088481" target="_blank" class="btn">📲 WhatsApp</a>
+        <a href="https://gofood.co.id/batam/restaurant/nice-vegetarian-perum-griyamas-c313e7e9-1a62-4c50-ac2c-34ca0b643a6d" target="_blank" class="btn outline">🛵 GoFood</a>
+    </div>
+
 </div>
 
-<div class="favorite-item" onclick="openModal(this)">
-<img src="images/lele-penyet.jpg">
-<div class="favorite-info">
-Lele Penyet<br>
-<span class="price">Rp27.000</span>
-</div>
-</div>
-
-<div class="favorite-item" onclick="openModal(this)">
-<img src="images/nasi-goreng.jpg">
-<div class="favorite-info">
-Nasi Goreng<br>
-<span class="price">Rp20.000</span>
-</div>
-</div>
-
-<div class="favorite-item" onclick="openModal(this)">
-<img src="images/nasi-goreng-olive.jpg">
-<div class="favorite-info">
-Nasi Goreng Olive<br>
-<span class="price">Rp22.000</span>
-</div>
-</div>
-
-<div class="favorite-item" onclick="openModal(this)">
-<img src="images/ikan-sambal-kentang.jpg">
-<div class="favorite-info">
-Ikan Sambal Kentang<br>
-<span class="price">Rp27.000</span>
-</div>
-</div>
-
-</div>
-
-<div class="menu-note">
-Note: Untuk pemesanan dapat diakses melalui link Whatsapp dan link Go-Food dibawah:<br>
-<a href="https://gofood.co.id/batam/restaurant/nice-vegetarian-perum-griyamas-c313e7e9-1a62-4c50-ac2c-34ca0b643a6d" target="_blank">
-Klik di sini (GoFood)
-</a>
-</div>
-
-<div class="address-bar">
+<div class="location">
 📍 Komplek Perumahan Griya Mas Blok F No. 8, Sei Panas, Kota Batam
 </div>
 
-<div class="menu-contact">
-<h2>📞 Kontak & Pemesanan</h2>
-
-<a class="btn-wa" href="https://wa.me/6282385088481" target="_blank">
-Pesan via WhatsApp
-</a>
-
+<div class="map">
+<iframe 
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2861.9299709862257!2d104.03041417496541!3d1.1301865988589859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9890d97fbe63f%3A0x4a13d0ce65b70050!2sGriya%20Mas!5e1!3m2!1sid!2sid!4v1772551361091!5m2!1sid!2sid"
+width="100%"
+height="450"
+style="border:0;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
 </div>
 
 </section>
 
-<!-- ================= MODAL ================= -->
-<div class="modal" id="imageModal">
-<span onclick="closeModal()">&times;</span>
-<img id="modalImg">
-<p id="modalCaption"></p>
-</div>
+<script>
+window.addEventListener("scroll", function(){
+    const header = document.querySelector("header");
+    header.classList.toggle("scrolled", window.scrollY > 50);
+});
+</script>
 
 <script>
-function showSection(id){
-document.querySelectorAll('.page-section').forEach(s=>{
-s.classList.remove('active');
-});
-document.getElementById(id).classList.add('active');
-}
 
-function openModal(card){
-const modal=document.getElementById("imageModal");
-const img=card.querySelector("img");
-document.getElementById("modalImg").src=img.src;
-document.getElementById("modalCaption").innerText=card.innerText;
-modal.style.display="flex";
+function openModal(img,title,price,rating){
+
+document.getElementById("menuModal").style.display="block";
+
+document.getElementById("modalImg").src = img.src;
+
+document.getElementById("modalTitle").innerText = title;
+
+document.getElementById("modalPrice").innerText = price;
+
+document.getElementById("modalRating").innerText = rating;
+
+let waNumber = "6282385088481";
+
+let message =
+"Halo Nice Veggie 👋%0A%0A" +
+"Apakah menu berikut masih tersedia?%0A%0A" +
+"Menu : " + title + "%0A" +
+"Harga : " + price + "%0A%0A" +
+"Foto Menu :%0A" + img.src;
+
+let waLink = "https://wa.me/" + waNumber + "?text=" + message;
+
+document.getElementById("orderBtn").href = waLink;
+
+document.body.classList.add("modal-open");
+
 }
 
 function closeModal(){
-document.getElementById("imageModal").style.display="none";
+
+document.getElementById("menuModal").style.display="none";
+
+/* buka kembali scroll */
+document.body.classList.remove("modal-open");
+
 }
-</script>
-<script>
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
-    });
+
+window.onclick = function(event){
+
+let modal = document.getElementById("menuModal");
+
+if(event.target == modal){
+closeModal();
+}
+
+}
+
+document.addEventListener("keydown", function(e){
+
+if(e.key === "Escape"){
+closeModal();
+}
+
 });
 
-document.querySelectorAll(".favorite-item").forEach(el=>{
-    el.classList.add("fade-in");
-    observer.observe(el);
-});
 </script>
+
+<div id="menuModal" class="modal">
+
+<span class="close" onclick="closeModal()">×</span>
+
+<img class="modal-img" id="modalImg">
+
+<div class="modal-info">
+
+<h3 id="modalTitle"></h3>
+<p id="modalPrice"></p>
+<p id="modalRating"></p>
+
+<a id="orderBtn" target="_blank" class="btn-order">
+Konfirmasi ketersediaan menu
+</a>
+
+</div>
+
+</div>
 
 </body>
 </html>
