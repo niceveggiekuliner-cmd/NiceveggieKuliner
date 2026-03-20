@@ -34,8 +34,6 @@
     <!-- VIDEO BACKGROUND -->
     <video autoplay muted loop playsinline preload="auto" class="bg-video">
         <source src="images/cooking.mp4" type="video/mp4">
-    </video>
-
     <div class="overlay"></div>
 
 </section>
@@ -70,6 +68,12 @@
 <section id="menu" class="menu">
     <div class="container">
         <h2>Menu Favorit Kami</h2>
+
+        <div style="text-align:right; margin-bottom:20px;">
+            <button onclick="openAdminModal()" class="admin-btn">
+                🔒 Edit Harga
+            </button>
+        </div>
 
         <div class="menu-grid">
 
@@ -172,6 +176,11 @@ document.addEventListener("keydown", function(e){
     if(e.key === "Escape"){
         closeModal();
     }
+let admin = document.getElementById("adminModal");
+    if(e.key === "Escape" && admin.style.display === "block"){
+        closeAdminModal();
+    }
+
 });
 </script>
 
@@ -218,9 +227,6 @@ Konfirmasi ketersediaan menu
 
     </div>
 </div>
-
-<!-- 🔒 ADMIN BUTTON -->
-<button onclick="openAdminModal()" class="admin-btn">🔒 Edit Harga</button>
 
 <!-- ✅ SEMUA SCRIPT DI SINI -->
 <script>
