@@ -227,6 +227,7 @@ Konfirmasi ketersediaan menu
 
 // MODAL MENU
 function openModal(img,title,price,rating){
+
     let cards = document.querySelectorAll(".card");
     let index = Array.from(cards).findIndex(card => card.contains(img));
     let savedPrice = localStorage.getItem("price_" + index);
@@ -239,6 +240,17 @@ function openModal(img,title,price,rating){
     document.getElementById("modalRating").innerText = rating;
 
     let waNumber = "6282385088481";
+
+    let imageMap = {
+    "Bebek Cabe Hijau": "https://i.imgur.com/audSeby.jpeg",
+    "Lele Penyet": "https://i.imgur.com/MmRMCTB.jpeg",
+    "Nasi Goreng": "https://i.imgur.com/HB3o8pI.jpeg",
+    "Ikan Sambal Kentang": "https://i.imgur.com/WCdCIaT.png",
+    "Nasi Goreng Olive": "https://i.imgur.com/SoVdaAB.jpeg"
+};
+
+let imageLink = imageMap[title];
+
     let message =
     `Halo Nice Veggie
 
@@ -247,8 +259,10 @@ function openModal(img,title,price,rating){
 
     Apakah masih tersedia?`;
 
-    message += "\n\nFoto:\n" + img.src;
-
+    if(imageLink){
+    message += "\n\n" + imageLink;
+}
+    
     document.getElementById("orderBtn").href =
     "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(message);
 
