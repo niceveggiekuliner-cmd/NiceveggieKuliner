@@ -18,18 +18,6 @@ body{
 }
 
 /* ================= NAVBAR ================= */
-
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    background:white;
-    padding:15px 40px; /* bikin langsung ada jarak dari pinggir */
-    border-bottom:2px solid #1B5E20;
-    z-index:1000;
-}
-
 .nav{
     display:flex;
     justify-content:space-between; /* kiri & kanan */
@@ -82,20 +70,19 @@ nav a:hover{
 
 /* HERO */
 header{
-    position:absolute;   /* UBAH dari fixed jadi absolute */
+    position:absolute;
     top:0;
     left:0;
     width:100%;
     padding:20px 40px;
     z-index:9999;
-    background:transparent;   /* transparan */
-    border-bottom:none;       /* hapus garis bawah */
+    background:transparent;
+    transition:0.3s;
 }
 
 header.scrolled{
-    position: fixed;
-    top: 0;
-    background: black;
+    position:fixed;
+    background:black;
 }
 
 .hero{
@@ -351,4 +338,86 @@ transition:0.3s;
 .btn-order:hover{
 transform:translateY(-3px);
 box-shadow:0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* ================= ADMIN BUTTON ================= */
+
+.admin-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#1B5E20;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:30px;
+    font-weight:600;
+    cursor:pointer;
+    z-index:9999;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    transition:0.3s;
+    opacity:0.2;
+}
+
+.admin-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    opacity:1;
+}
+
+.admin-btn{
+    opacity:0.2;
+}
+
+.admin-btn:hover{
+    opacity:1;
+}
+
+/* ================= ADMIN MODAL ================= */
+
+#adminModal{
+    display:none;
+    position:fixed;
+    z-index:10000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+/* box modal */
+#adminModal > div{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    max-width:350px;
+    margin:150px auto;
+    text-align:center;
+    animation:fadeIn 0.3s ease;
+}
+
+/* input password */
+#adminModal input{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+#adminModal input:focus{
+    border-color:#1B5E20;
+}
+
+/* animasi muncul */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }

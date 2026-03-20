@@ -161,63 +161,18 @@ window.addEventListener("scroll", function(){
 </script>
 
 <script>
-
-function openModal(img,title,price,rating){
-
-document.getElementById("menuModal").style.display="block";
-
-document.getElementById("modalImg").src = img.src;
-
-document.getElementById("modalTitle").innerText = title;
-
-document.getElementById("modalPrice").innerText = price;
-
-document.getElementById("modalRating").innerText = rating;
-
-let waNumber = "6282385088481";
-
-let message =
-"Halo Nice Veggie 👋%0A%0A" +
-"Apakah menu berikut masih tersedia?%0A%0A" +
-"Menu : " + title + "%0A" +
-"Harga : " + price + "%0A%0A" +
-"Foto Menu :%0A" + img.src;
-
-let waLink = "https://wa.me/" + waNumber + "?text=" + message;
-
-document.getElementById("orderBtn").href = waLink;
-
-document.body.classList.add("modal-open");
-
-}
-
-function closeModal(){
-
-document.getElementById("menuModal").style.display="none";
-
-/* buka kembali scroll */
-document.body.classList.remove("modal-open");
-
-}
-
 window.onclick = function(event){
-
-let modal = document.getElementById("menuModal");
-
-if(event.target == modal){
-closeModal();
-}
-
+    let modal = document.getElementById("menuModal");
+    if(event.target == modal){
+        closeModal();
+    }
 }
 
 document.addEventListener("keydown", function(e){
-
-if(e.key === "Escape"){
-closeModal();
-}
-
+    if(e.key === "Escape"){
+        closeModal();
+    }
 });
-
 </script>
 
 <div id="menuModal" class="modal">
@@ -238,7 +193,153 @@ Konfirmasi ketersediaan menu
 
 </div>
 
+</div> <!-- penutup menuModal -->
+
+<!-- 🔥 TAMBAHKAN DI SINI -->
+<div id="adminModal" class="modal">
+    <div style="background:white; padding:30px; border-radius:15px; max-width:350px; margin:150px auto; text-align:center;">
+        
+        <h3>Masukin Password untuk ganti harga</h3>
+
+        <div style="position:relative;">
+    <input type="password" id="adminPassword" placeholder="Masukkan password"
+    style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;">
+
+    <span onclick="togglePassword()" 
+    style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">
+    👁
+    </span>
 </div>
 
+        <br><br>
+
+        <button onclick="checkPassword()">Masuk</button>
+        <button onclick="closeAdminModal()">Batal</button>
+
+    </div>
+</div>
+
+<!-- 🔒 ADMIN BUTTON -->
+<button onclick="openAdminModal()" class="admin-btn">🔒 Edit Harga</button>
+
+<!-- ✅ SEMUA SCRIPT DI SINI -->
+<script>
+
+// MODAL MENU
+function openModal(img,title,price,rating){
+    let cards = document.querySelectorAll(".card");
+    let index = Array.from(cards).findIndex(card => card.contains(img));
+    let savedPrice = localStorage.getItem("price_" + index);
+    if(savedPrice){ price = savedPrice; }
+
+    document.getElementById("menuModal").style.display="block";
+    document.getElementById("modalImg").src = img.src;
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalPrice").innerText = price;
+    document.getElementById("modalRating").innerText = rating;
+
+    let waNumber = "6282385088481";
+    let message =
+    `Halo Nice Veggie
+
+    Menu : ${title}
+    Harga : ${price}
+
+    Apakah masih tersedia?`;
+
+    message += "\n\nFoto:\n" + img.src;
+
+    document.getElementById("orderBtn").href =
+    "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(message);
+
+    document.body.classList.add("modal-open");
+}
+
+function closeModal(){
+    document.getElementById("menuModal").style.display="none";
+    document.body.classList.remove("modal-open");
+}
+
+// EDIT HARGA
+function runEditHarga(){
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach((card, index) => {
+        let title = card.querySelector("h3").innerText;
+        let priceEl = card.querySelector(".price");
+
+        let current = priceEl.innerText.replace("Rp","").replace(/\./g,"");
+
+        let newPrice = prompt(
+    "Menu: " + title + "\n\nMasukkan harga baru:",
+    current
+);
+
+// 🔥 VALIDASI ANGKA
+if(newPrice !== null){
+
+    // hanya angka (regex)
+    if(!/^[0-9]+$/.test(newPrice)){
+        alert("Harga harus berupa angka!");
+        return;
+    }
+
+    let formatted = "Rp" + parseInt(newPrice).toLocaleString("id-ID");
+
+    priceEl.innerText = formatted;
+    localStorage.setItem("price_" + index, formatted);
+}
+    });
+}
+
+// ADMIN MODAL
+function openAdminModal(){
+    document.getElementById("adminModal").style.display = "block";
+    document.getElementById("adminPassword").value = "";
+
+    // 🔥 TAMBAHAN INI (NGUNCI SCROLL)
+    document.body.classList.add("modal-open");
+}
+
+function closeAdminModal(){
+    document.getElementById("adminModal").style.display = "none";
+
+    // 🔥 RESET PASSWORD
+    document.getElementById("adminPassword").value = "";
+}
+
+function togglePassword(){
+    let input = document.getElementById("adminPassword");
+    input.type = input.type === "password" ? "text" : "password";
+}
+
+function checkPassword(){
+    let pin = document.getElementById("adminPassword").value;
+
+    if(pin === "1234NiceVeggie"){
+        alert("Mode Admin Aktif!");
+
+        closeAdminModal();
+
+        document.body.classList.remove("modal-open"); // 🔥 FIX SCROLL
+
+        runEditHarga();
+
+    } else {
+        alert("Password salah!");
+    }
+}
+
+// LOAD HARGA
+window.addEventListener("DOMContentLoaded", () => {
+    let prices = document.querySelectorAll(".price");
+
+    prices.forEach((el, index) => {
+        let saved = localStorage.getItem("price_" + index);
+        if(saved){ el.innerText = saved; }
+    });
+});
+
+</script>
 </body>
 </html>
