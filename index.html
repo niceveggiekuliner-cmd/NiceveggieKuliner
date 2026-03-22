@@ -525,6 +525,20 @@ function submitMenu(){
 </div>
 `;
 
+// 🔥 SIMPAN KE LOCAL STORAGE
+let menuData = {
+    nama: nama,
+    harga: harga,
+    rating: rating,
+    image: e.target.result
+};
+
+let menus = JSON.parse(localStorage.getItem("menus")) || [];
+
+menus.push(menuData);
+
+localStorage.setItem("menus", JSON.stringify(menus));
+
         let grid = document.querySelector(".menu-grid");
 
 // ambil tombol tambah menu
@@ -544,6 +558,38 @@ document.getElementById("uploadPassword").addEventListener("keydown", function(e
     if(e.key === "Enter"){
         checkUploadPassword();
     }
+
+});
+
+// 🔥 LOAD DATA MENU SAAT REFRESH
+document.addEventListener("DOMContentLoaded", function(){
+
+    let menus = JSON.parse(localStorage.getItem("menus")) || [];
+
+    let addCard = document.querySelector(".add-card");
+
+    menus.forEach(menu => {
+
+        let newMenu = `
+        <div class="card new-menu">
+
+            <div class="menu-top">
+                <img src="${menu.image}" 
+                onclick="openModal(this,'${menu.nama}','Rp${parseInt(menu.harga).toLocaleString("id-ID")}','${"⭐".repeat(menu.rating)}')">
+
+                <span class="menu-option" onclick="openDelete(this)">⋮</span>
+            </div>
+
+            <h3>${menu.nama}</h3>
+            <div class="price">Rp${parseInt(menu.harga).toLocaleString("id-ID")}</div>
+            <div class="rating">${"⭐".repeat(menu.rating)}</div>
+
+        </div>
+        `;
+
+        addCard.insertAdjacentHTML("beforebegin", newMenu);
+
+    });
 
 });
 
