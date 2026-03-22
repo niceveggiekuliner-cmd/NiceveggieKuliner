@@ -439,11 +439,19 @@ function openDelete(el){
 
     if(pass === "1234NiceVeggie"){
 
-        card.remove();
+        // 🔥 DEBUG DI SINI
+        console.log("ID dari card:", id);
 
         let menus = JSON.parse(localStorage.getItem("menus")) || [];
+        console.log("Data sebelum delete:", menus);
 
+        // hapus dari tampilan
+        card.remove();
+
+        // hapus dari storage
         menus = menus.filter(menu => menu.id != id);
+
+        console.log("Data setelah filter:", menus);
 
         localStorage.setItem("menus", JSON.stringify(menus));
 
@@ -516,47 +524,35 @@ function submitMenu(){
 
     reader.onload = function(e){
 
-        let stars = "⭐".repeat(rating);
+        let menuData = {
+            id: Date.now(),
+            nama: nama,
+            harga: harga,
+            rating: rating,
+            image: e.target.result
+        };
 
         let newMenu = `
         <div class="card new-menu" data-id="${menuData.id}">
+            <div class="menu-top">
+                <img src="${menuData.image}" 
+                onclick="openModal(this,'${menuData.nama}','Rp${parseInt(menuData.harga).toLocaleString("id-ID")}','${"⭐".repeat(menuData.rating)}')">
 
-    <div class="menu-top">
-        <img src="${e.target.result}" 
-        onclick="openModal(this,'${nama}','Rp${parseInt(harga).toLocaleString("id-ID")}','${"⭐".repeat(rating)}')">
+                <span class="menu-option" onclick="openDelete(this)">⋮</span>
+            </div>
 
-        <span class="menu-option" onclick="openDelete(this)">⋮</span>
-    </div>
+            <h3>${menuData.nama}</h3>
+            <div class="price">Rp${parseInt(menuData.harga).toLocaleString("id-ID")}</div>
+            <div class="rating">${"⭐".repeat(menuData.rating)}</div>
+        </div>
+        `;
 
-    <h3>${nama}</h3>
-    <div class="price">Rp${parseInt(harga).toLocaleString("id-ID")}</div>
-    <div class="rating">${"⭐".repeat(rating)}</div>
+        let menus = JSON.parse(localStorage.getItem("menus")) || [];
+        menus.push(menuData);
+        localStorage.setItem("menus", JSON.stringify(menus));
 
-</div>
-`;
-
-// 🔥 SIMPAN KE LOCAL STORAGE
-let menuData = {
-    id: Date.now(), // 🔥 unik
-    nama: nama,
-    harga: harga,
-    rating: rating,
-    image: e.target.result
-};
-
-let menus = JSON.parse(localStorage.getItem("menus")) || [];
-
-menus.push(menuData);
-
-localStorage.setItem("menus", JSON.stringify(menus));
-
-        let grid = document.querySelector(".menu-grid");
-
-// ambil tombol tambah menu
-let addCard = document.querySelector(".add-card");
-
-// tambahin menu baru SEBELUM tombol tambah
-addCard.insertAdjacentHTML("beforebegin", newMenu);
+        let addCard = document.querySelector(".add-card");
+        addCard.insertAdjacentHTML("beforebegin", newMenu);
 
         closeUpload();
     }
