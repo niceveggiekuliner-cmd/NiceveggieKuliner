@@ -122,6 +122,12 @@
                 <div class="rating">⭐⭐⭐⭐</div>
             </div>
 
+            <!-- CARD TAMBAH MENU -->
+            <div class="card add-card" onclick="openUpload()">
+                 <div class="add-content">
+                    <span class="plus">+</span>
+                    <p>Tambah Menu</p>
+            </div>
         </div>
     </div>
 </section>
@@ -131,7 +137,7 @@
 
 <div class="order-bar">
 
-    <h2>“Kritik & saran melalui WhatsApp, Menu lainnya tersedia di GoFood 😊⬇️.”</h2>
+    <h2>⬇️Kritik dan saran dapat langsung hub ke WhatsApp kami & Menu lainnya tersedia di GoFood 😊.⬇️</h2>
 
     <div class="order-buttons">
         <a href="https://wa.me/6282385088481" target="_blank" class="btn">📲 WhatsApp</a>
@@ -173,12 +179,28 @@ window.onclick = function(event){
 }
 
 document.addEventListener("keydown", function(e){
+
+    let menu = document.getElementById("menuModal");
+    let admin = document.getElementById("adminModal");
+    let upload = document.getElementById("uploadModal");
+
     if(e.key === "Escape"){
-        closeModal();
-    }
-let admin = document.getElementById("adminModal");
-    if(e.key === "Escape" && admin.style.display === "block"){
-        closeAdminModal();
+
+        // menu modal
+        if(menu.style.display === "block"){
+            closeModal();
+        }
+
+        // admin modal
+        else if(admin.style.display === "block"){
+            closeAdminModal();
+        }
+
+        // upload modal
+        else if(upload.style.display === "block"){
+            closeUpload();
+        }
+
     }
 
 });
@@ -224,6 +246,49 @@ Konfirmasi ketersediaan menu
 
         <button onclick="checkPassword()">Masuk</button>
         <button onclick="closeAdminModal()">Batal</button>
+
+    </div>
+</div>
+
+<!-- MODAL TAMBAH MENU -->
+<div id="uploadModal" class="modal">
+    <div style="background:white; padding:25px; border-radius:12px; max-width:350px; margin:100px auto; text-align:center;">
+
+        <!-- PASSWORD -->
+        <div id="step1">
+            <h3>Masukin Password untuk tambahin menu favorit</h3>
+            <div style="position:relative;">
+    <input type="password" id="uploadPassword" placeholder="Masukkan password">
+
+    <span onclick="toggleUploadPassword()" class="eye-icon">
+        👁
+    </span>
+</div>
+
+<br><br>
+            <button onclick="checkUploadPassword()">Lanjut</button>
+            <button onclick="closeUpload()">Batal</button>
+        </div>
+
+        <!-- FORM -->
+        <div id="step2" style="display:none;">
+            <h3>Tambah Menu</h3>
+
+            <input type="file" id="uploadImage"><br><br>
+            <input type="text" id="uploadNama" placeholder="Nama Menu"><br><br>
+            <input type="number" id="uploadHarga" placeholder="Harga"><br><br>
+
+            <select id="uploadRating">
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select><br><br>
+
+            <button onclick="submitMenu()">Selesai</button>
+            <button onclick="closeUpload()">Batal</button>
+        </div>
 
     </div>
 </div>
@@ -326,6 +391,9 @@ function closeAdminModal(){
 
     // 🔥 RESET PASSWORD
     document.getElementById("adminPassword").value = "";
+
+    // 🔥 TAMBAH INI (FIX SCROLL)
+    document.body.classList.remove("modal-open");
 }
 
 function togglePassword(){
@@ -358,6 +426,125 @@ window.addEventListener("DOMContentLoaded", () => {
         let saved = localStorage.getItem("price_" + index);
         if(saved){ el.innerText = saved; }
     });
+});
+
+let selectedMenu = null;
+
+function openDelete(el){
+    selectedMenu = el.closest(".card");
+
+    let pass = prompt("Masukkan password untuk hapus menu favorit:");
+
+    if(pass === "1234NiceVeggie"){
+        selectedMenu.remove();
+    } else {
+        alert("Password salah!");
+    }
+}
+
+// ==========================
+// TAMBAH MENU
+// ==========================
+
+// OPEN MODAL
+function openUpload(){
+    document.getElementById("uploadModal").style.display = "block";
+
+    // 🔥 LOCK SCROLL
+    document.body.classList.add("modal-open");
+
+    // RESET
+    document.getElementById("uploadPassword").value = "";
+    document.getElementById("step1").style.display = "block";
+    document.getElementById("step2").style.display = "none";
+}
+
+// CLOSE MODAL
+function closeUpload(){
+    document.getElementById("uploadModal").style.display = "none";
+
+    // 🔥 BALIKIN SCROLL
+    document.body.classList.remove("modal-open");
+}
+
+// CEK PASSWORD
+function checkUploadPassword(){
+    let pass = document.getElementById("uploadPassword").value;
+
+    if(pass === "1234NiceVeggie"){
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+    } else {
+        alert("Password salah!");
+    }
+}
+
+function toggleUploadPassword(){
+    let input = document.getElementById("uploadPassword");
+
+    if(input.type === "password"){
+        input.type = "text";
+    } else {
+        input.type = "password";
+    }
+}
+
+// SUBMIT MENU
+function submitMenu(){
+
+    let nama = document.getElementById("uploadNama").value;
+    let harga = document.getElementById("uploadHarga").value;
+    let rating = document.getElementById("uploadRating").value;
+    let file = document.getElementById("uploadImage").files[0];
+
+    if(!nama || !harga || !file){
+        alert("Isi semua dulu!");
+        return;
+    }
+
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+
+        let stars = "⭐".repeat(rating);
+
+        let newMenu = `
+<div class="card new-menu">
+
+    <div class="menu-top">
+        <img src="${e.target.result}" 
+        onclick="openModal(this,'${nama}','Rp${parseInt(harga).toLocaleString("id-ID")}','${"⭐".repeat(rating)}')">
+
+        <span class="menu-option" onclick="openDelete(this)">⋮</span>
+    </div>
+
+    <h3>${nama}</h3>
+    <div class="price">Rp${parseInt(harga).toLocaleString("id-ID")}</div>
+    <div class="rating">${"⭐".repeat(rating)}</div>
+
+</div>
+`;
+
+        let grid = document.querySelector(".menu-grid");
+
+// ambil tombol tambah menu
+let addCard = document.querySelector(".add-card");
+
+// tambahin menu baru SEBELUM tombol tambah
+addCard.insertAdjacentHTML("beforebegin", newMenu);
+
+        closeUpload();
+    }
+
+    reader.readAsDataURL(file);
+}
+
+document.getElementById("uploadPassword").addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+        checkUploadPassword();
+    }
+
 });
 
 </script>
