@@ -519,7 +519,7 @@ function submitMenu(){
         let stars = "⭐".repeat(rating);
 
         let newMenu = `
-<div class="card new-menu" data-id="${menu.id}">
+        <div class="card new-menu" data-id="${menuData.id}">
 
     <div class="menu-top">
         <img src="${e.target.result}" 
@@ -582,7 +582,7 @@ document.addEventListener("DOMContentLoaded", function(){
     menus.forEach(menu => {
 
         let newMenu = `
-<div class="card new-menu" data-id="${tempMenu.id}">
+        <div class="card new-menu" data-id="${menu.id}">
 
             <div class="menu-top">
                 <img src="${menu.image}" 
