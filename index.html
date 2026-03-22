@@ -431,12 +431,22 @@ window.addEventListener("DOMContentLoaded", () => {
 let selectedMenu = null;
 
 function openDelete(el){
-    selectedMenu = el.closest(".card");
 
-    let pass = prompt("Masukkan password untuk hapus menu favorit:");
+    let card = el.closest(".card");
+    let id = card.getAttribute("data-id");
+
+    let pass = prompt("Masukkan password untuk hapus:");
 
     if(pass === "1234NiceVeggie"){
-        selectedMenu.remove();
+
+        card.remove();
+
+        let menus = JSON.parse(localStorage.getItem("menus")) || [];
+
+        menus = menus.filter(menu => menu.id != id);
+
+        localStorage.setItem("menus", JSON.stringify(menus));
+
     } else {
         alert("Password salah!");
     }
@@ -509,7 +519,7 @@ function submitMenu(){
         let stars = "⭐".repeat(rating);
 
         let newMenu = `
-<div class="card new-menu">
+<div class="card new-menu" data-id="${menu.id}">
 
     <div class="menu-top">
         <img src="${e.target.result}" 
@@ -527,6 +537,7 @@ function submitMenu(){
 
 // 🔥 SIMPAN KE LOCAL STORAGE
 let menuData = {
+    id: Date.now(), // 🔥 unik
     nama: nama,
     harga: harga,
     rating: rating,
@@ -571,7 +582,7 @@ document.addEventListener("DOMContentLoaded", function(){
     menus.forEach(menu => {
 
         let newMenu = `
-        <div class="card new-menu">
+<div class="card new-menu" data-id="${tempMenu.id}">
 
             <div class="menu-top">
                 <img src="${menu.image}" 
